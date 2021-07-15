@@ -3,8 +3,9 @@ import { writable } from "svelte/store";
 
 let socket;
 
+export const socketUpdateStore = writable({});
+
 export const createSocketConnection = () => {
-  const socketUpdateStore = writable({});
 
   socket = socketIOClient("http://localhost:6969", {
     withCredentials: true,
@@ -16,14 +17,13 @@ export const createSocketConnection = () => {
   });
 
   socket.on("payload", async (data) => {
-    socketUpdateStore.set(data);
+    // socketUpdateStore.set(data);
   });
 
   socket.on("update", (update) => {
-    socketUpdateStore.set(update);
+    console.log(update)
+    // socketUpdateStore.set(update);
   });
-
-  return socketUpdateStore;
 };
 
 export const socketSendMessage = (message) => {

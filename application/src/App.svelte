@@ -1,18 +1,13 @@
 <script>
   import { onMount } from "svelte";
 
-  import { createSocketConnection, socketSendMessage } from "./socketClientConnect.js";
-  import { socketUpdateProcessor } from "./socketUpdateProcessor.js";
-  import { updateStateStore, currentArenaStore, ballStore, playersStore, teamsStore } from "./stores";
+  import { createSocketConnection, socketSendMessage } from "./containers/socketManager.js";
 
   import Minimap from "./Minimap.svelte";
 
-  let socketUpdateStore;
   onMount(() => {
-    socketUpdateStore = createSocketConnection();
+    createSocketConnection();
   });
-
-  $: socketUpdateProcessor($socketUpdateStore);
 
   let sendMessage = () => {
     socketSendMessage({

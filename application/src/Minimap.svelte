@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { run } from "svelte/internal";
 
   import { teamsStore, ballStore, playersStore, focusedPlayerIDStore } from "./stores";
 
