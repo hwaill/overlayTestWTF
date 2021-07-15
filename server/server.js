@@ -22,7 +22,7 @@ const io = require("socket.io")(server, {
     // allow all, including from basic html page not hosted from node/express, etc.
     origin: ["*", "null", "http://localhost:5000"],
     // origin example for a locally hosted React app, and socket.io admin dashboard
-    //origin: ['http://localhost:3000', 'https://admin.socket.io'],
+    // origin: ['http://localhost:3000', 'https://admin.socket.io'],
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -88,6 +88,7 @@ io.on("connection", (socket) => {
     // console.log(payload);
     // socket.to('REACTLOCAL').emit('payload', payload);
     // ! socket.to will NOT be received by the sender, change to io.to for single page apps if you want the sender to also receive the payload for state updates, etc. !
+    console.log(payload);
     socket.to("game").emit("payload", payload);
   });
 
@@ -132,7 +133,7 @@ const initWsClient = () => {
       console.error("Rocket League WebSocket Server Closed!");
       console.log("Attempting reconnection...");
       initWsClient();
-    }, 10000);
+    }, 1000);
   };
 
   wsClient.onopen = function open() {
